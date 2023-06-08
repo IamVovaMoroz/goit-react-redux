@@ -1,17 +1,27 @@
 // создаём store
 import { createStore } from  'redux'
+import { rootReducer } from './reducer'
 
 // 1) cоздали reducer который будет менять state
 // функция reducer .Принимаем state и возвращает его пока что
-const reducer = (state, action) => {
+export const reducer = (state, action) => {
     console.log("action", action)
     if (action.type === "INCREMENT"){
-        return state + action.payload 
+        // total что хотим поменять, указываем ключ и значение + действие из payload
+       
+        // return {total: state.total + action.payload }
+         // чтобы не потерять никакое значение, ключ и т.д. изменив то что поменялось, вначале распыляем state а потом перезаписываем что нужно
+
+         return {...state,  total: state.total + action.payload }
     }
     if (action.type === "DECREMENT"){
-        return state - action.payload 
+        return {...state, total: state.total - action.payload }
     }
 
+    if (action.type === "setStep"){
+        // step изменится на то что передали в action.payload
+        return {...state, step: action.payload }
+    }
 
  
     return state}
@@ -31,4 +41,9 @@ const reducer = (state, action) => {
 
 // console.log("store.getState после reducer", store.getState()) // undefined , пока нет state.  Или значение будет, если передали тут: const store = createStore(reducer, 0 )
 
-export const store = createStore(reducer, {total:100} )
+// export const store = createStore(rootReducer, {total:0, step: 1} )
+
+export const store = createStore(rootReducer )
+
+
+console.log("store.getState после reducer", store.getState()) 
