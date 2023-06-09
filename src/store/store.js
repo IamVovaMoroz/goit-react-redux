@@ -1,5 +1,6 @@
 // создаём store
-import { createStore } from  'redux'
+// import { createStore } from  'redux'
+import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from './reducer'
 
 // 1) cоздали reducer который будет менять state
@@ -43,7 +44,17 @@ export const reducer = (state, action) => {
 
 // export const store = createStore(rootReducer, {total:0, step: 1} )
 
-export const store = createStore(rootReducer )
+// export const store = createStore(rootReducer )
+
+
+// console.log("store.getState после reducer", store.getState()) 
+
+
+// вместо createStore используем configureStore, принимает только обьект
+export const store = configureStore({reducer: rootReducer})
 
 
 console.log("store.getState после reducer", store.getState()) 
+
+
+

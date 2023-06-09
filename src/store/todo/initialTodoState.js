@@ -1,4 +1,4 @@
-export const initualTodoState = {
+export const initialTodoState = {
     todo: [],
     folteredTodo:  [],
 }
